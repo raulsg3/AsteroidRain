@@ -9,6 +9,10 @@ GameObject:
   m_Component:
   - component: {fileID: 400000}
   - component: {fileID: 5400000}
+  - component: {fileID: 114883822346777334}
+  - component: {fileID: 114234541301789222}
+  - component: {fileID: 114208499401728472}
+  - component: {fileID: 114139901339517030}
   m_Layer: 0
   m_Name: Asteroid_1
   m_TagString: Asteroid
@@ -143,3 +147,53 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
+--- !u!114 &114139901339517030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4879ea3a1cc5894ebf6e7ff11fab79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 0.7
+  maxScale: 1.5
+--- !u!114 &114208499401728472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd3cac9b2556ce43894363922309f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 0.5
+  maxSpeed: 5
+--- !u!114 &114234541301789222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8438d067b91ea4ba75037b34bbbee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 0.5
+  maxSpeed: 3
+--- !u!114 &114883822346777334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ce6bae8cce30744ad2cde5b65c3ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
