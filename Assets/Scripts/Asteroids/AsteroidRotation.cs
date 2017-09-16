@@ -5,8 +5,8 @@ using UnityEngine;
 /**
  * Random rotation along all three axis.
  */
-public class ObjectRotation : MonoBehaviour {
-
+public class AsteroidRotation : MonoBehaviour
+{
     // Rotation speed range
     [Header("Rotation Speed Range")]
     public float minSpeed = 0.5f;

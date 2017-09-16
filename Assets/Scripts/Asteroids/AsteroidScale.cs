@@ -5,8 +5,8 @@ using UnityEngine;
 /**
  * Random scale.
  */
-public class ObjectScale : MonoBehaviour {
-
+public class AsteroidScale : MonoBehaviour
+{
     // Scale range
     protected const float MinScale = 0.5f;
     protected const float MaxScale = 1.5f;

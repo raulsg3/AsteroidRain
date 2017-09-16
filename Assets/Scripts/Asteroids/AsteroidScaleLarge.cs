@@ -5,8 +5,8 @@ using UnityEngine;
 /**
  * Random larger scale.
  */
-public class ObjectScaleLarge : ObjectScale {
-
+public class AsteroidScaleLarge : AsteroidScale
+{
     // Larger scale range
     private const float MinScaleLarge = 1.5f;
     private const float MaxScaleLarge = 2.5f;

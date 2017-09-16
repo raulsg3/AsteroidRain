@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * Objects (only asteroids in this case) get distroyed when they reach the
- * limit of the screen or when they collide with another object.
+ * Asteroids get distroyed when they reach the limit of the
+ * screen or when they collide with another object.
  */
-public class ObjectDestroy : MonoBehaviour {
+public class AsteroidDestroy : MonoBehaviour
+{
     
     void OnTriggerEnter(Collider other)
     {

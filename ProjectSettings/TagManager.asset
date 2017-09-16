@@ -9,6 +9,8 @@ TagManager:
   - SuperAsteroid
   - MainLight
   - ScreenLimit
+  - GameManager
+  - AsteroidsManager
   layers:
   - Default
   - TransparentFX

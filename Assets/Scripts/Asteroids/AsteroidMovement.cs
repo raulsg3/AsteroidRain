@@ -5,8 +5,8 @@ using UnityEngine;
 /**
  * Movement along the Y axis with random speed.
  */
-public class ObjectMovement : MonoBehaviour {
-
+public class AsteroidMovement : MonoBehaviour
+{
     // Movement speed range
     [Header("Movement Speed Range")]
     public float minSpeed = 0.5f;
