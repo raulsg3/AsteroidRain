@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Game score
+    private int score = 0;
+    public int Score
+    {
+        get { return score; }
+    }
+
     // Game over
     private bool gameOver = false;
     public bool GameOver
     {
         get { return gameOver; }
-        set { gameOver = value; }
     }
 
     #region Singleton
@@ -22,11 +28,19 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-	void Start ()
+    /**
+     * Increase the game score.
+     */
+    public void IncreaseScore(int points = 1)
     {
-	}
-	
-	void Update ()
+        score += points;
+    }
+
+    /**
+     * Game finished.
+     */
+    private void EndGame()
     {
-	}
+        gameOver = true;
+    }
 }

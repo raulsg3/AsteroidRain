@@ -11,6 +11,10 @@ public class AsteroidsManager : MonoBehaviour
         Super
     }
 
+    // Maximum positive force applied to asteroids created after
+    // splitting a super asteroid
+    private const float MaxForce = 30f;
+
     // Asteroids parent gameobject
     private GameObject asteroidsParent;
 
@@ -25,7 +29,7 @@ public class AsteroidsManager : MonoBehaviour
 
     // Waiting time before spawning a new asteroid
     [Header("Asteroids Spawn")]
-    public float spawnTime = 0.5f;
+    public float spawnTime = 1f;
     public float superAsteroidProb = 0.2f;
 
     #region Singleton
@@ -80,25 +84,30 @@ public class AsteroidsManager : MonoBehaviour
     /**
      * Generate one asteroid.
      */
-    private void GenerateAsteroid()
+    private GameObject GenerateAsteroid()
     {
-        // Asteroid prefab
-        GameObject asteroid = GetRandomAsteroid();
-
-        // Type
+        // Asteroid type
         AsteroidType type = GetRandomAsteroidType();
 
         // Spawn position
         float spawnPos_X = GetRandomPosition_X();
         Vector3 spawnPosition = new Vector3(spawnPos_X, spawnPos_Y, 0f);
 
-        InstantiateAsteroid(asteroid, type, spawnPosition);
+        return GenerateAsteroid(type, spawnPosition);
+    }
+
+    private GameObject GenerateAsteroid(AsteroidType astType, Vector3 astPosition)
+    {
+        // Asteroid prefab
+        GameObject asteroid = GetRandomAsteroid();
+
+        return InstantiateAsteroid(asteroid, astType, astPosition);
     }
     
     /**
      * Instantiate one asteroid according to the given parameters.
      */
-    private void InstantiateAsteroid(GameObject astPrefab, AsteroidType astType, Vector3 astPosition)
+    private GameObject InstantiateAsteroid(GameObject astPrefab, AsteroidType astType, Vector3 astPosition)
     {
         // GameObject instance
         GameObject asteroidInstance = (GameObject)Instantiate(astPrefab, astPosition, Quaternion.identity);
@@ -109,11 +118,15 @@ public class AsteroidsManager : MonoBehaviour
         {
             case AsteroidType.Normal:
                 asteroidInstance.AddComponent<AsteroidScale>();
+                asteroidInstance.AddComponent<ClickForDestroy>();
                 break;
             case AsteroidType.Super:
                 asteroidInstance.AddComponent<AsteroidScaleLarge>();
+                asteroidInstance.AddComponent<ClickForSplit>();
                 break;
         }
+
+        return asteroidInstance;
     }
 
     /**
@@ -142,6 +155,30 @@ public class AsteroidsManager : MonoBehaviour
     private float GetRandomPosition_X()
     {
         return Random.Range(spawnPosMin_X, spawnPosMax_X);
+    }
+
+    /**
+     * Asteroid distroyed by the player.
+     */
+    public void AsteroidDistroyed()
+    {
+        // Increase game score
+        GameManager.instance.IncreaseScore();
+    }
+
+    /**
+     * Asteroid split into pieces by the player.
+     */
+    public void AsteroidSplit(Vector3 astPosition, int pieces = 2)
+    {
+        // Generate new asteroids
+        for (int i = 0; i < pieces; ++i)
+        {
+            GameObject asteroid = GenerateAsteroid(AsteroidType.Normal, astPosition);
+
+            float forceToAdd = Random.Range(-MaxForce, MaxForce);
+            asteroid.GetComponent<Rigidbody>().AddForce(forceToAdd, 0f, 0f);
+        }
     }
 
 }

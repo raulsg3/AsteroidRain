@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * Asteroids get distroyed when they reach the limit of the
- * screen or when they collide with another object.
+ * Asteroids get distroyed automatically when they reach the
+ * limit of the screen.
  */
 public class AsteroidDestroy : MonoBehaviour
 {
@@ -13,11 +13,6 @@ public class AsteroidDestroy : MonoBehaviour
     {
         if (other.CompareTag("ScreenLimit"))
         {
-            Destroy(this.gameObject);
-        }
-        else if (other.CompareTag("Asteroid"))
-        {
-            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }
