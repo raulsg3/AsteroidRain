@@ -20,13 +20,16 @@ public class AsteroidDestroy : MonoBehaviour
         astExplosion = AsteroidsManager.instance.GetAsteroidExplosion(AsteroidsManager.AsteroidType.Normal);
 
         // Asteroids explosions parent gameobject
-        astExplosionsParent = GameObject.FindWithTag("AsteroidsExplosions");
+        astExplosionsParent = GameObject.FindWithTag(Tags.AsteroidsExplosions);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ScreenLimit"))
+        if (other.CompareTag(Tags.ScreenLimit))
         {
+            // Asteroid not distroyed by the player
+            GameManager.instance.LoseLife();
+
             Destroy(this.gameObject);
 
             GameObject explosionInstance = Instantiate(astExplosion, transform.position, transform.rotation);

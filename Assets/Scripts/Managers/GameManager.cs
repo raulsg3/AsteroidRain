@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Game lives
+    public int gameLives = 5;
+    public int Lives
+    {
+        get { return gameLives; }
+    }
+
     // Game score
     private int score = 0;
     public int Score
@@ -29,6 +36,17 @@ public class GameManager : MonoBehaviour
     #endregion
 
     /**
+     * Decrease the number of lives remaining.
+     */
+    public void LoseLife()
+    {
+        gameLives--;
+
+        if (gameLives == 0)
+            EndGame();
+    }
+
+    /**
      * Increase the game score.
      */
     public void IncreaseScore(int points = 1)
@@ -42,5 +60,6 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         gameOver = true;
+        AudioManager.instance.StopBackgroundMusic();
     }
 }

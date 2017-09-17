@@ -63,7 +63,7 @@ public class AsteroidsManager : MonoBehaviour
         }
 
         // Asteroids parent gameobject
-        asteroidsParent = GameObject.FindWithTag("Asteroids");
+        asteroidsParent = GameObject.FindWithTag(Tags.Asteroids);
 
         // Asteroids spawn limits
         Camera mainCamera  = Camera.main;
@@ -75,7 +75,7 @@ public class AsteroidsManager : MonoBehaviour
 
         spawnPos_Y = cameraHeight / 2 + SpawnMargin_Y;
 
-        GameObject screenLimit = GameObject.FindWithTag("ScreenLimit");
+        GameObject screenLimit = GameObject.FindWithTag(Tags.ScreenLimit);
         spawnPosMax_Z = screenLimit.transform.localScale.z / 2 - SpawnMargin_Z;
         spawnPosMin_Z = -spawnPosMax_Z;
 
@@ -147,6 +147,14 @@ public class AsteroidsManager : MonoBehaviour
     }
 
     /**
+     * Return the explosion gameobject for an asteroid type.
+     */
+    public GameObject GetAsteroidExplosion(AsteroidType astType)
+    {
+        return asteroidsExplosions[(int)astType];
+    }
+
+    /**
      * Return a random asteroid prefab.
      */
     private GameObject GetRandomAsteroid()
@@ -204,14 +212,6 @@ public class AsteroidsManager : MonoBehaviour
             float forceToAdd = Random.Range(-MaxForce, MaxForce);
             asteroid.GetComponent<Rigidbody>().AddForce(forceToAdd, 0f, 0f);
         }
-    }
-
-    /**
-     * Return the explosion gameobject for an asteroid type.
-     */
-    public GameObject GetAsteroidExplosion(AsteroidType astType)
-    {
-        return asteroidsExplosions[(int) astType];
     }
 
 }

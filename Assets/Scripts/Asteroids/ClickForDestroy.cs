@@ -16,7 +16,7 @@ public class ClickForDestroy : MonoBehaviour
         astExplosion = GetExplosion();
 
         // Asteroids explosions parent gameobject
-        astExplosionsParent = GameObject.FindWithTag("AsteroidsExplosions");
+        astExplosionsParent = GameObject.FindWithTag(Tags.AsteroidsExplosions);
     }
 
     void OnMouseDown()
