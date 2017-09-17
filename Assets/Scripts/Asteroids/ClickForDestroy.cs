@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class ClickForDestroy : MonoBehaviour
 {
+    // Asteroid explosion
+    private GameObject astExplosion;
+
+    // Asteroids explosions parent gameobject
+    private GameObject astExplosionsParent;
+
+    void Start()
+    {
+        // Asteroid explosion
+        astExplosion = GetExplosion();
+
+        // Asteroids explosions parent gameobject
+        astExplosionsParent = GameObject.FindWithTag("AsteroidsExplosions");
+    }
 
     void OnMouseDown()
     {
         PerformClick();
         Destroy(this.gameObject);
+
+        GameObject explosionInstance = Instantiate(astExplosion, transform.position, transform.rotation);
+        explosionInstance.transform.parent = astExplosionsParent.transform;
+    }
+
+    /**
+     * Return the specific explosion for this gameobject.
+     */
+    protected virtual GameObject GetExplosion()
+    {
+        return AsteroidsManager.instance.GetAsteroidExplosion(AsteroidsManager.AsteroidType.Normal);
     }
 
     /**

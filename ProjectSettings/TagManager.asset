@@ -11,6 +11,9 @@ TagManager:
   - ScreenLimit
   - GameManager
   - AsteroidsManager
+  - AsteroidsExplosions
+  - Explosion
+  - SuperExplosion
   layers:
   - Default
   - TransparentFX

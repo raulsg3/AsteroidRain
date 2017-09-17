@@ -5,11 +5,16 @@ using UnityEngine;
 public class AsteroidsManager : MonoBehaviour
 {
     // Possible types of asteroids
-    private enum AsteroidType
+    public enum AsteroidType
     {
         Normal,
         Super
     }
+
+    // Margin distances for spawning asteroids
+    private const float SpawnMargin_X = 2f;
+    private const float SpawnMargin_Y = 1f;
+    private const float SpawnMargin_Z = 2f;
 
     // Maximum positive force applied to asteroids created after
     // splitting a super asteroid
@@ -22,10 +27,16 @@ public class AsteroidsManager : MonoBehaviour
     private float spawnPosMin_X;
     private float spawnPosMax_X;
     private float spawnPos_Y;
+    private float spawnPosMin_Z;
+    private float spawnPosMax_Z;
 
     // Asteroids prefabs
     [Header("Game Asteroids")]
     public GameObject[] gameAsteroids;
+
+    // Asteroids explosions
+    [Header("Asteroids Explosions")]
+    public GameObject[] asteroidsExplosions = new GameObject[System.Enum.GetNames(typeof(AsteroidType)).Length];
 
     // Waiting time before spawning a new asteroid
     [Header("Asteroids Spawn")]
@@ -59,9 +70,14 @@ public class AsteroidsManager : MonoBehaviour
         float cameraHeight = mainCamera.orthographicSize * 2f;
         float cameraWidth  = cameraHeight * mainCamera.aspect;
         
-        spawnPos_Y    = cameraHeight / 2 + 1f;
-        spawnPosMax_X = cameraWidth / 2 - 1f;
+        spawnPosMax_X = cameraWidth / 2 - SpawnMargin_X;
         spawnPosMin_X = -spawnPosMax_X;
+
+        spawnPos_Y = cameraHeight / 2 + SpawnMargin_Y;
+
+        GameObject screenLimit = GameObject.FindWithTag("ScreenLimit");
+        spawnPosMax_Z = screenLimit.transform.localScale.z / 2 - SpawnMargin_Z;
+        spawnPosMin_Z = -spawnPosMax_Z;
 
         StartCoroutine(GenerateAsteroids());
 	}
@@ -91,7 +107,8 @@ public class AsteroidsManager : MonoBehaviour
 
         // Spawn position
         float spawnPos_X = GetRandomPosition_X();
-        Vector3 spawnPosition = new Vector3(spawnPos_X, spawnPos_Y, 0f);
+        float spawnPos_Z = GetRandomPosition_Z();
+        Vector3 spawnPosition = new Vector3(spawnPos_X, spawnPos_Y, spawnPos_Z);
 
         return GenerateAsteroid(type, spawnPosition);
     }
@@ -158,6 +175,14 @@ public class AsteroidsManager : MonoBehaviour
     }
 
     /**
+     * Return a random position for the Z axis.
+     */
+    private float GetRandomPosition_Z()
+    {
+        return Random.Range(spawnPosMin_Z, spawnPosMax_Z);
+    }
+
+    /**
      * Asteroid distroyed by the player.
      */
     public void AsteroidDistroyed()
@@ -179,6 +204,14 @@ public class AsteroidsManager : MonoBehaviour
             float forceToAdd = Random.Range(-MaxForce, MaxForce);
             asteroid.GetComponent<Rigidbody>().AddForce(forceToAdd, 0f, 0f);
         }
+    }
+
+    /**
+     * Return the explosion gameobject for an asteroid type.
+     */
+    public GameObject GetAsteroidExplosion(AsteroidType astType)
+    {
+        return asteroidsExplosions[(int) astType];
     }
 
 }
