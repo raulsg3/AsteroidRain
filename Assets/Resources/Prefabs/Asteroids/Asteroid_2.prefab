@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ce6bae8cce30744ad2cde5b65c3ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  astExplosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
 --- !u!114 &114588541468380588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 0.5
-  maxSpeed: 3
+  maxSpeed: 5
 --- !u!114 &114861820467993746
 MonoBehaviour:
   m_ObjectHideFlags: 1
