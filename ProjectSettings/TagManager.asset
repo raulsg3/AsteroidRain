@@ -14,6 +14,10 @@ TagManager:
   - AsteroidsExplosions
   - Explosion
   - SuperExplosion
+  - Enemy
+  - UI_Score
+  - UI_Time
+  - UI_Lives
   layers:
   - Default
   - TransparentFX
