@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateLivesValue(gameLives);
         UIManager.instance.UpdateScoreValue(score);
         UIManager.instance.UpdateTimeValue(Mathf.FloorToInt(gameTimeSeconds));
+
+        // Time running
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -105,6 +108,9 @@ public class GameManager : MonoBehaviour
     {
         gamePaused = !gamePaused;
         Time.timeScale = (GamePaused || GameOver) ? 0f : 1f;
+
+        if (!GameOver)
+            UIManager.instance.PauseGame(GamePaused);
     }
 
     /**
@@ -112,9 +118,10 @@ public class GameManager : MonoBehaviour
      */
     private void EndGame()
     {
+        gameOver = true;
         PauseGame();
 
-        gameOver = true;
+        UIManager.instance.EndGame(Score);
         AudioManager.instance.StopBackgroundMusic();
     }
 }

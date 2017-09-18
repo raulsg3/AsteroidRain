@@ -9,9 +9,16 @@ public class UIManager : MonoBehaviour
     public Text livesValue;
     public Text timeValue;
     public Text scoreValue;
+    public Text gameOverScoreValue;
 
     // GUI red image
     public Image redImage;
+
+    // Pause GUI
+    public GameObject pauseCanvas;
+
+    // Game over GUI
+    public GameObject gameOverCanvas;
 
     #region Singleton
     public static UIManager instance;
@@ -44,17 +51,27 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreValue(int score)
     {
+        scoreValue.text = GetScoreString(score);
+    }
+
+    public void UpdateGameOverScoreValue(int score)
+    {
+        gameOverScoreValue.text = GetScoreString(score);
+    }
+
+    private string GetScoreString(int score)
+    {
         // Score value is displayed (in asteroids) using three digits
-        string newScoreValue;
+        string scoreValueString;
 
         if (score < 10)
-            newScoreValue = "00" + score;
+            scoreValueString = "00" + score;
         else if (score < 100)
-            newScoreValue = "0" + score;
+            scoreValueString = "0" + score;
         else
-            newScoreValue = score.ToString();
+            scoreValueString = score.ToString();
 
-        scoreValue.text = newScoreValue;
+        return scoreValueString;
     }
 
     /**
@@ -80,6 +97,23 @@ public class UIManager : MonoBehaviour
         Color redImageColor = redImage.color;
         redImageColor.a = alpha;
         redImage.color = redImageColor;
+    }
+
+    /**
+     * Pause GUI.
+     */
+    public void PauseGame(bool pause)
+    {
+        pauseCanvas.SetActive(pause);
+    }
+
+    /**
+     * Game over GUI.
+     */
+    public void EndGame(int finalScore)
+    {
+        gameOverCanvas.SetActive(true);
+        UpdateGameOverScoreValue(finalScore);
     }
 
 }
