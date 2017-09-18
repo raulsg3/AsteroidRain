@@ -85,7 +85,7 @@ public class AsteroidsManager : MonoBehaviour
     /**
      * Asteroids generation coroutine.
      */
-    IEnumerator GenerateAsteroids()
+    private IEnumerator GenerateAsteroids()
     {
         while (!GameManager.instance.GameOver)
         {

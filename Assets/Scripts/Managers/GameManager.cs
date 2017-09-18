@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         gameLives--;
         UIManager.instance.UpdateLivesValue(gameLives);
+        UIManager.instance.LoseLife();
 
         if (gameLives == 0)
             EndGame();

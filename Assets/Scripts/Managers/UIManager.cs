@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     public Text timeValue;
     public Text scoreValue;
 
+    // GUI red image
+    public Image redImage;
+
     #region Singleton
     public static UIManager instance;
 
@@ -52,6 +55,31 @@ public class UIManager : MonoBehaviour
             newScoreValue = score.ToString();
 
         scoreValue.text = newScoreValue;
+    }
+
+    /**
+     * Make the screen flash red for a short time.
+     */
+    public void LoseLife()
+    {
+        StartCoroutine(RedFlash(0.0f, 0.4f, 0.5f)); // Fade in
+        StartCoroutine(RedFlash(0.4f, 0.0f, 0.5f)); // Fade out
+    }
+
+    private IEnumerator RedFlash(float startAlpha, float endAlpha, float duration)
+    {
+        for (float i = 0f; i < 1f; i += Time.deltaTime * (1 / duration))
+        {
+            SetRedFlashAlpha(Mathf.Lerp(startAlpha, endAlpha, i));
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void SetRedFlashAlpha(float alpha)
+    {
+        Color redImageColor = redImage.color;
+        redImageColor.a = alpha;
+        redImage.color = redImageColor;
     }
 
 }
