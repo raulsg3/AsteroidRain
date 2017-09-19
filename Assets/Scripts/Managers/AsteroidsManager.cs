@@ -139,6 +139,7 @@ public class AsteroidsManager : MonoBehaviour
                 break;
             case AsteroidType.Super:
                 asteroidInstance.AddComponent<AsteroidScaleLarge>();
+                asteroidInstance.AddComponent<AsteroidGlow>();
                 asteroidInstance.AddComponent<ClickForSplit>();
                 break;
         }
