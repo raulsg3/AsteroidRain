@@ -1,7 +1,5 @@
 # Asteroid Rain #
 
-* 3D game for Windows x64.
-
 * **Unity version:** 2017.1.1f1 Personal (64bit)
 * **Platform:** Windows 8.1 x64
 * **Assets included:**
